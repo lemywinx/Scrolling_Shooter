@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
-class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngineBroadcaster, PlayerLaserSpawner {
+class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngineBroadcaster, PlayerLaserSpawner, AlienLaserSpawner {
 
     HUD mHUD;
     Renderer mRenderer;
@@ -56,7 +56,7 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
                 // Update all the game objects here
                 // in a new way
                 // This call to update will evolve with the project
-                if(mPhysicsEngine.update(mFPS,objects, mGameState, mSoundEngine, mParticleSystem)){
+                if (mPhysicsEngine.update(mFPS, objects, mGameState, mSoundEngine, mParticleSystem)) {
                     // Player hit
                     deSpawnReSpawn();
                 }
@@ -104,6 +104,23 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
         return true;
     }
 
+    public void spawnAlienLaser(Transform transform) {
+        ArrayList<GameObject> objects = mLevel.getGameObjects();
+
+        // Shoot laser IF AVAILABLE
+        // Pass in the transform of the ship
+        // that requested the shot to be fired
+        if (objects.get(Level.mNextAlienLaser).spawn(transform)) {
+            Level.mNextAlienLaser++;
+            mSoundEngine.playShoot();
+            if (Level.mNextAlienLaser == Level.LAST_ALIEN_LASER + 1) {
+
+                // Just used the last laser
+                Level.mNextAlienLaser = Level.FIRST_ALIEN_LASER;
+            }
+        }
+    }
+
     public void stopThread() {
         mGameState.stopEverything();
         try {
@@ -128,6 +145,10 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
         }
         objects.get(Level.PLAYER_INDEX).spawn(objects.get(Level.PLAYER_INDEX).getTransform());
         objects.get(Level.BACKGROUND_INDEX).spawn(objects.get(Level.PLAYER_INDEX).getTransform());
+
+        for (int i = Level.FIRST_ALIEN; i != Level.LAST_ALIEN + 1; i++) {
+            objects.get(i).spawn(objects.get(Level.PLAYER_INDEX).getTransform());
+        }
     }
 
 
