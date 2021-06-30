@@ -8,6 +8,9 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
+/*
+    Draws all objects on the screen
+ */
 class Renderer {
     private Canvas mCanvas;
     private SurfaceHolder mSurfaceHolder;
@@ -24,21 +27,25 @@ class Renderer {
             mCanvas.drawColor(Color.argb(255, 0, 0, 0));
 
             if (gs.getDrawing()) {
+
                 // Draw all the game objects here
                 for (GameObject object : objects) {
-                    if(object.checkActive()) {
+                    if (object.checkActive()) {
                         object.draw(mCanvas, mPaint);
                     }
                 }
             }
             if (gs.getGameOver()) {
+
                 // Draw a background graphic here
                 objects.get(Level.BACKGROUND_INDEX).draw(mCanvas, mPaint);
             }
+
             // Draw a particle system explosion here
             if (ps.mIsRunning) {
                 ps.draw(mCanvas, mPaint);
             }
+
             // Now we draw the HUD on top of everything else
             hud.draw(mCanvas, mPaint, gs);
             mSurfaceHolder.unlockCanvasAndPost(mCanvas);

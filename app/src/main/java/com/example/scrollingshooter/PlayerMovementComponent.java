@@ -2,7 +2,11 @@ package com.example.scrollingshooter;
 
 import android.graphics.PointF;
 
+/*
+    Handles how the player moves within the screen boundaries
+ */
 class PlayerMovementComponent implements MovementComponent {
+
     @Override
     public boolean move(long fps, Transform t, Transform playerTransform) {
 

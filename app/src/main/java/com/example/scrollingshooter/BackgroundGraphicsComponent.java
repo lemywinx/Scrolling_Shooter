@@ -9,7 +9,11 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
+/*
+    Draws two copies of the background side by side
+ */
 class BackgroundGraphicsComponent implements GraphicsComponent {
+
     private Bitmap mBitmap;
     private Bitmap mBitmapReversed;
 

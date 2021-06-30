@@ -1,5 +1,8 @@
 package com.example.scrollingshooter;
 
+/*
+    Specifies where the player is spawned on screen
+ */
 class PlayerSpawnComponent implements SpawnComponent {
 
     @Override

@@ -9,6 +9,11 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
+/*
+    Maintains access and control of all game objects
+    Informs other classes of when they need to handle user input
+ */
+
 class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngineBroadcaster, PlayerLaserSpawner, AlienLaserSpawner {
 
     HUD mHUD;
@@ -32,12 +37,10 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
         mHUD = new HUD(size);
         mRenderer = new Renderer(this);
         mPhysicsEngine = new PhysicsEngine();
-
         mParticleSystem = new ParticleSystem();
-        // Even just 10 particles look good
-        // But why have less when you can have more
-        mParticleSystem.init(1000);
 
+        // Creates the particle explosion
+        mParticleSystem.init(1000);
         mLevel = new Level(context, new PointF(size.x, size.y), this);
     }
 
@@ -53,18 +56,16 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
             ArrayList<GameObject> objects = mLevel.getGameObjects();
 
             if (!mGameState.getPaused()) {
-                // Update all the game objects here
-                // in a new way
-                // This call to update will evolve with the project
+                // Update all the game objects
                 if (mPhysicsEngine.update(mFPS, objects, mGameState, mSoundEngine, mParticleSystem)) {
+
                     // Player hit
                     deSpawnReSpawn();
                 }
             }
 
-            // Draw all the game objects here
-            // in a new way
-            // Measure the frames per second in the usual way
+            // Draw all the game objects
+            // Measure the frames per second
             mRenderer.draw(objects, mGameState, mHUD, mParticleSystem);
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
@@ -77,15 +78,10 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        // Handle the player's input here
-        // But in a new way
+        // Handle the player's input
         for (InputObserver o : inputObservers) {
             o.handleInput(motionEvent, mGameState, mHUD.getControls());
         }
-
-        // This is temporary code to emit a particle system
-        // mParticleSystem.emitParticles(new PointF(500, 500));
-
         return true;
     }
 
@@ -108,8 +104,7 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
         ArrayList<GameObject> objects = mLevel.getGameObjects();
 
         // Shoot laser IF AVAILABLE
-        // Pass in the transform of the ship
-        // that requested the shot to be fired
+        // Pass in the transform of the ship that requested the shot to be fired
         if (objects.get(Level.mNextAlienLaser).spawn(transform)) {
             Level.mNextAlienLaser++;
             mSoundEngine.playShoot();
@@ -138,7 +133,6 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
 
     //Despawns and respawns game objects
     public void deSpawnReSpawn() {
-
         ArrayList<GameObject> objects = mLevel.getGameObjects();
         for (GameObject o : objects) {
             o.setInactive();
@@ -150,6 +144,4 @@ class GameEngine extends SurfaceView implements Runnable, GameStarter, GameEngin
             objects.get(i).spawn(objects.get(Level.PLAYER_INDEX).getTransform());
         }
     }
-
-
 }

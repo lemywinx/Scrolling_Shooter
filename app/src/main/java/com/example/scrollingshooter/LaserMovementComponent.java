@@ -2,7 +2,11 @@ package com.example.scrollingshooter;
 
 import android.graphics.PointF;
 
+/*
+    Handles movement of the laser object
+ */
 class LaserMovementComponent implements MovementComponent {
+
     @Override
     public boolean move(long fps, Transform t, Transform playerTransform) {
         float range = t.getmScreenSize().x * 2;
@@ -20,6 +24,7 @@ class LaserMovementComponent implements MovementComponent {
 
         // Has the laser gone out of range
         if (location.x < -range || location.x > range) {
+
             // disable the laser
             return false;
         }

@@ -14,19 +14,18 @@ class Particle {
         mVelocity.y = direction.y;
     }
 
-    void update()
-    {
-    // Move the particle
+    void update() {
+        // Move the particle
         mPosition.x += mVelocity.x;
         mPosition.y += mVelocity.y;
     }
-    void setPosition(PointF position)
-    {
+
+    PointF getPosition() {
+        return mPosition;
+    }
+
+    void setPosition(PointF position) {
         mPosition.x = position.x;
         mPosition.y = position.y;
-    }
-    PointF getPosition()
-    {
-        return mPosition;
     }
 }

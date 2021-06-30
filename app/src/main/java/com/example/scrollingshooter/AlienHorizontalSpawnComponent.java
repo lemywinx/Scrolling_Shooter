@@ -4,6 +4,9 @@ import android.graphics.PointF;
 
 import java.util.Random;
 
+/*
+    Holds the logic required to spawn an object horizontally off-screen
+ */
 class AlienHorizontalSpawnComponent implements SpawnComponent {
 
     @Override
@@ -17,11 +20,9 @@ class AlienHorizontalSpawnComponent implements SpawnComponent {
         boolean left = random.nextBoolean();
 
         // How far away?
-        float distance = random.nextInt(2000)
-                + t.getmScreenSize().x;
+        float distance = random.nextInt(2000) + t.getmScreenSize().x;
 
-        // Generate a height to spawn at where
-        // the entire ship is vertically on-screen
+        // Generate a height to spawn at where the entire ship is vertically on-screen
         float spawnHeight = random.nextFloat() * ss.y - t.getSize().y;
 
         // Spawn the ship

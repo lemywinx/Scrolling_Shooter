@@ -1,9 +1,13 @@
 package com.example.scrollingshooter;
 
 import android.graphics.PointF;
+
 import java.util.Random;
-class AlienDiverMovementComponent implements MovementComponent
-{
+
+/*
+    Contains the diving alien movement logic
+ */
+class AlienDiverMovementComponent implements MovementComponent {
     @Override
     public boolean move(long fps, Transform t, Transform playerTransform) {
 
@@ -16,26 +20,24 @@ class AlienDiverMovementComponent implements MovementComponent
         // Relative speed difference with player
         float slowDownRelativeToPlayer = 1.8f;
 
-        // Compensate for movement relative to player-
-        // but only when in view.
+        // Compensate for movement relative to player but only when in view.
         // Otherwise alien will disappear miles off to one side
-        if(!playerTransform.getFacingRight()){
+        if (!playerTransform.getFacingRight()) {
             location.x += speed * slowDownRelativeToPlayer / fps;
-        } else{
+        } else {
             location.x -= speed * slowDownRelativeToPlayer / fps;
         }
 
         // Fall down then respawn at the top
         location.y += speed / fps;
-        if(location.y > t.getmScreenSize().y){
+        if (location.y > t.getmScreenSize().y) {
             // Respawn at top
             Random random = new Random();
             location.y = random.nextInt(300) - t.getObjectHeight();
-            location.x = random.nextInt((int)t.getmScreenSize().x);
+            location.x = random.nextInt((int) t.getmScreenSize().x);
         }
         // Update the collider
         t.updateCollider();
         return true;
     }
 }
-

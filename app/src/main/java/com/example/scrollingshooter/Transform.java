@@ -3,9 +3,12 @@ package com.example.scrollingshooter;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+/*
+       Holds all the data and performs all the operations that are common to all GameObject instances
+ */
 class Transform {
+
     private static PointF mScreenSize;
-    // These two members are for scrolling background
     private int mXClip;
     private boolean mReversedFirst = false;
     private RectF mCollider;
@@ -141,9 +144,9 @@ class Transform {
         } else {
             mFiringLocation.x = mLocation.x + (mObjectWidth / 8f) - (laserLength);
         }
+
         // Move the height down a bit of ship height from origin
         mFiringLocation.y = mLocation.y + (mObjectHeight / 1.28f);
         return mFiringLocation;
     }
-
 }

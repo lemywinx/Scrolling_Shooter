@@ -5,7 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+/*
+    Handles what the game objects have in common
+ */
 class GameObject {
+
     private Transform mTransform;
     private boolean isActive = false;
     private String mTag;
@@ -40,12 +44,14 @@ class GameObject {
 
     void update(long fps, Transform playerTransform) {
         if (!(movementComponent.move(fps, mTransform, playerTransform))) {
+
             // Component returned false`
             isActive = false;
         }
     }
 
     boolean spawn(Transform playerTransform) {
+
         // Only spawnComponent if not already active
         if (!isActive) {
             spawnComponent.spawn(playerTransform, mTransform);
@@ -75,4 +81,3 @@ class GameObject {
         mTransform = t;
     }
 }
-

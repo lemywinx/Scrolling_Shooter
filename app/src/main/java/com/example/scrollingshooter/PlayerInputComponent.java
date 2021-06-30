@@ -5,6 +5,9 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+/*
+    Handles screen touches and acts as an observer to the GameEngine class
+ */
 class PlayerInputComponent implements InputComponent, InputObserver {
 
     private Transform mTransform;
@@ -20,8 +23,7 @@ class PlayerInputComponent implements InputComponent, InputObserver {
         mTransform = transform;
     }
 
-    // Required method of InputObserver
-    // interface called from the onTouchEvent method
+    // Required method of InputObserver interface called from the onTouchEvent method
     @Override
     public void handleInput(MotionEvent event, GameState gameState, ArrayList<Rect> buttons) {
         int i = event.getActionIndex();
@@ -63,13 +65,13 @@ class PlayerInputComponent implements InputComponent, InputObserver {
 
             case MotionEvent.ACTION_POINTER_DOWN:
                 if (buttons.get(HUD.UP).contains(x, y)) {
-                // Player has pressed up
+                    // Player has pressed up
                     mTransform.headUp();
                 } else if (buttons.get(HUD.DOWN).contains(x, y)) {
-                // Player has pressed down
+                    // Player has pressed down
                     mTransform.headDown();
                 } else if (buttons.get(HUD.FLIP).contains(x, y)) {
-                // Player has released the flip button
+                    // Player has released the flip button
                     mTransform.flip();
                 } else if (buttons.get(HUD.SHOOT).contains(x, y)) {
                     mPLS.spawnPlayerLaser(mTransform);

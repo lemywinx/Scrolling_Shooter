@@ -8,6 +8,9 @@ import android.graphics.Rect;
 
 import java.util.ArrayList;
 
+/*
+    Controls the drawing and position of text and control buttons
+ */
 class HUD {
     static int UP = 0;
     static int DOWN = 1;
@@ -36,6 +39,7 @@ class HUD {
         Rect flip = new Rect(mScreenWidth - buttonPadding - buttonWidth, mScreenHeight - buttonHeight - buttonPadding, mScreenWidth - buttonPadding, mScreenHeight - buttonPadding);
         Rect shoot = new Rect(mScreenWidth - buttonPadding - buttonWidth, mScreenHeight - (buttonHeight * 2) - (buttonPadding * 2), mScreenWidth - buttonPadding, mScreenHeight - buttonHeight - (buttonPadding * 2));
         Rect pause = new Rect(mScreenWidth - buttonPadding - buttonWidth, buttonPadding, mScreenWidth - buttonPadding, buttonPadding + buttonHeight);
+
         controls = new ArrayList<>();
         controls.add(UP, up);
         controls.add(DOWN, down);
@@ -45,6 +49,7 @@ class HUD {
     }
 
     void draw(Canvas c, Paint p, GameState gs) {
+
         // Draw the HUD
         p.setColor(Color.argb(255, 255, 255, 255));
         p.setTextSize(mTextFormatting);
@@ -70,6 +75,7 @@ class HUD {
         for (Rect r : controls) {
             c.drawRect(r.left, r.top, r.right, r.bottom, p);
         }
+
         // Set the colors back
         p.setColor(Color.argb(255, 255, 255, 255));
     }

@@ -2,6 +2,9 @@ package com.example.scrollingshooter;
 
 import android.graphics.PointF;
 
+/*
+    Handles where the laser will spawn
+ */
 class LaserSpawnComponent implements SpawnComponent {
 
     @Override

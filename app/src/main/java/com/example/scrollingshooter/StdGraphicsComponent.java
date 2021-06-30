@@ -8,12 +8,17 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+/*
+    Handles the initialize and draw methods
+ */
+
 class StdGraphicsComponent implements GraphicsComponent {
     private Bitmap mBitmap;
     private Bitmap mBitmapReversed;
 
     @Override
     public void initialize(Context context, ObjectSpec spec, PointF objectSize) {
+
         // Make a resource id out of the string of the filename
         int resID = context.getResources().getIdentifier(spec.getBitmapName(), "drawable", context.getPackageName());
 
@@ -31,7 +36,7 @@ class StdGraphicsComponent implements GraphicsComponent {
 
     @Override
     public void draw(Canvas canvas, Paint paint, Transform t) {
-        if(t.getFacingRight())
+        if (t.getFacingRight())
             canvas.drawBitmap(mBitmap, t.getLocation().x, t.getLocation().y, paint);
         else
             canvas.drawBitmap(mBitmapReversed, t.getLocation().x, t.getLocation().y, paint);

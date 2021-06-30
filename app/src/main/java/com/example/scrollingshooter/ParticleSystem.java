@@ -1,6 +1,7 @@
 package com.example.scrollingshooter;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -46,16 +47,11 @@ class ParticleSystem {
 
     void draw(Canvas canvas, Paint paint) {
         for (Particle p : mParticles) {
-            paint.setARGB(255,
-                    random.nextInt(256),
-                    random.nextInt(256),
-                    random.nextInt(256));
-            // Uncomment the next line to have plain white particles
-            //paint.setColor(Color.argb(255,255,255,255));
-            canvas.drawRect(p.getPosition().x,
-                    p.getPosition().y,
-                    p.getPosition().x + 25,
-                    p.getPosition().y + 25, paint);
+            paint.setARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
+            //Particles set to white
+            paint.setColor(Color.argb(255, 255, 255, 255));
+            canvas.drawRect(p.getPosition().x, p.getPosition().y, p.getPosition().x + 25, p.getPosition().y + 25, paint);
         }
     }
 }

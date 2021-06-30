@@ -10,14 +10,18 @@ import android.os.Build;
 
 import java.io.IOException;
 
+/*
+    Triggers sound effects dependent upon gameplay
+ */
 class SoundEngine {
-    // for playing sound effects
+
     private SoundPool mSP;
     private int mShoot_ID = -1;
     private int mAlien_Explode_ID = -1;
     private int mPlayer_explode_ID = -1;
 
     SoundEngine(Context c) {
+
         // Initialize the SoundPool
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build();

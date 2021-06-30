@@ -1,5 +1,8 @@
 package com.example.scrollingshooter;
 
+/*
+    Spawns the background object
+ */
 class BackgroundSpawnComponent implements SpawnComponent {
 
     @Override

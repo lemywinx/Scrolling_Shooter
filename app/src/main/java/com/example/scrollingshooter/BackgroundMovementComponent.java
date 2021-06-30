@@ -1,6 +1,10 @@
 package com.example.scrollingshooter;
 
+/*
+    Moves the two images on the screen to give the illusion of scrolling
+ */
 class BackgroundMovementComponent implements MovementComponent {
+
     @Override
     public boolean move(long fps, Transform t, Transform playerTransform) {
 

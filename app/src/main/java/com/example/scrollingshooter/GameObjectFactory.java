@@ -3,6 +3,9 @@ package com.example.scrollingshooter;
 import android.content.Context;
 import android.graphics.PointF;
 
+/*
+    Assembles GameObject instances with their correct components
+ */
 class GameObjectFactory {
 
     private Context mContext;
@@ -103,4 +106,3 @@ class GameObjectFactory {
         return object;
     }
 }
-

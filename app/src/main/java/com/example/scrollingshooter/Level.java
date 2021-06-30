@@ -5,6 +5,10 @@ import android.graphics.PointF;
 
 import java.util.ArrayList;
 
+/*
+    Creates the level
+    Handles how many aliens and lasers exist
+ */
 class Level {
 
     // Keep track of specific types
@@ -23,6 +27,7 @@ class Level {
     public static final int LAST_ALIEN_LASER = 15;
     public static int mNextPlayerLaser;
     public static int mNextAlienLaser;
+
     // This will hold all the instances of GameObject
     private ArrayList<GameObject> objects;
 
